@@ -5,7 +5,7 @@
 *.cache
 *.props
 *.targets
-*.fs
 *.txt
 *.xml
-.idea/.idea.BFS/.idea/indexLayout.xml
+
+BFS/obj/Debug/netcoreapp2.1/BFS.AssemblyInfo.fs
