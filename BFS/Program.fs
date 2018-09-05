@@ -1,9 +1,9 @@
 ﻿open System
 open System.IO
 
-let bf_extended_chars = ['+';'-';'[';']';'<';'>';'.';',';'@';'$';'#';'"';'"';'{';'}';'|';'/';'*';';';':';'\\';'?';'%']
+let bf_extended = ['+';'-';'[';']';'<';'>';'.';',';'@';'$';'#';'"';'"';'{';'}';'|';'/';'*';';';':';'\\';'?';'%']
 
-let bf_allowed = bf_extended_chars.[0..7]
+let bf_default = bf_extended.[0..7]
 
 let filter_program arr allowed = List.filter (fun c -> (List.exists (fun x -> x = c) allowed)) (arr |> Seq.toList)
 
@@ -90,7 +90,7 @@ let rec main_rec chars =
 [<EntryPoint>]
 let main argv =
     let files = Array.filter (fun (x:String) -> x.Contains(".bf")) argv
-    let chars = if Array.exists (fun x -> x = "-bf") argv then bf_allowed else bf_extended_chars
+    let chars = if Array.exists (fun x -> x = "-ebf") argv then bf_extended else bf_default
     if Array.length files <> 0 then
         let prog = Array.map (fun x -> File.ReadAllLines x |> String.concat "") files |> String.concat ""
         run prog chars
