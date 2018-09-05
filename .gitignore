@@ -1,0 +1,11 @@
+.idea/*
+*.json
+*.dll
+*.pdb
+*.cache
+*.props
+*.targets
+*.fs
+*.txt
+*.xml
+.idea/.idea.BFS/.idea/indexLayout.xml
