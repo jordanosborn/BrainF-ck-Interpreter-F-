@@ -55,6 +55,14 @@ let run input chars=
             | ',' ->
                 printf "\nSet value in %A: " counter
                 stack.[counter] <- Convert.ToByte(Console.ReadLine() |> char)
+            | '[' ->
+                brackets <- instruction_ptr::brackets
+                if stack.[counter] = 0uy then jump (instruction_ptr + 1)
+            | ']' ->
+                if stack.[counter] <> 0uy then
+                    instruction_ptr <- brackets.Head
+                else
+                    brackets <- brackets.Tail
             | '@' -> printfn "\nStack position: %A" counter
             | '$' -> printfn "\nStack value: %A" stack.[counter]
             | '|' -> register <- stack.[counter]
@@ -62,14 +70,6 @@ let run input chars=
             | ':' -> stack.[counter] <- stack.[counter] - register
             | '*' -> stack.[counter] <- stack.[counter] * register
             | '/' -> stack.[counter] <- stack.[counter] / register
-            | '[' ->
-                    brackets <- instruction_ptr::brackets
-                    if stack.[counter] = 0uy then jump (instruction_ptr + 1)
-            | ']' ->
-                    if stack.[counter] <> 0uy then
-                        instruction_ptr <- brackets.Head
-                    else
-                        brackets <- brackets.Tail
             | '%' -> printfn "Register value: %A" register
             | _ -> ()
             instruction_ptr <- instruction_ptr + 1
