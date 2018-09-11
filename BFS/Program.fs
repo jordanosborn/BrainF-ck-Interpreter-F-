@@ -49,8 +49,8 @@ let run input chars=
             match arr.[instruction_ptr] with
             | '+' -> stack.[counter] <- stack.[counter] + 1uy
             | '-' -> stack.[counter] <- match stack.[counter] - 1uy with | n when n>= 0uy -> n | _ -> 0uy
-            | '>' -> counter <- counter + 1
-            | '<' -> counter <- match counter - 1 with | n when n >= 0 -> n | _ -> 0
+            | '>' -> counter <- if counter = stack.Length -1 then 0 else counter + 1
+            | '<' -> counter <- if counter = 0 then stack.Length - 1 else counter - 1
             | '.' -> printf "%c" (stack.[counter] |> char)
             | ',' ->
                 printf "\nSet value in %A: " counter
